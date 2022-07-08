@@ -17,10 +17,10 @@ async function sessionFour() {
   userName = await driver.findElement(By.name("q"));
   userName.sendKeys("shan konduru", webdriver.Key.RETURN);
   let inputData = userName.getText();
-  console.log(inputData);  
+  console.log(inputData);
 
   actualuserName = await driver.findElement(By.name("q")).getText();
-  console.log(actualuserName);  
+  console.log(actualuserName);
 
   assert.equal(actualuserName, inputData);
 }
