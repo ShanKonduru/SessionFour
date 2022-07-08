@@ -1,6 +1,7 @@
+const assert = require("assert");
 const webdriver = require("selenium-webdriver");
 const chrome = require("selenium-webdriver/chrome");
-const { By, Key } = require("selenium-webdriver");
+const { By } = require("selenium-webdriver");
 
 const chromeOptions = new chrome.Options();
 chromeOptions.addArguments("start-maximized");
@@ -11,16 +12,17 @@ async function sessionFour() {
     .setChromeOptions(chromeOptions)
     .build();
 
-  driver.get("https://www.facebook.com/");
+  await driver.get("http://www.google.com/");
 
-  userName = await driver.findElement(By.name("email"));
-  userName.sendKeys("shankonduru@gmail.com");
+  userName = await driver.findElement(By.name("q"));
+  userName.sendKeys("shan konduru", webdriver.Key.RETURN);
+  let inputData = userName.getText();
+  console.log(inputData);  
 
-  password = driver.findElement(By.name("pass"));
-  password.sendKeys("shankonduru@");
+  actualuserName = await driver.findElement(By.name("q")).getText();
+  console.log(actualuserName);  
 
-  loginButton = driver.findElement(By.name("login"));
-  loginButton.click();
+  assert.equal(actualuserName, inputData);
 }
 
 sessionFour();
